@@ -42,15 +42,18 @@ app.get('/todos', function (req, res) {
 // GET /todos/:id
 app.get('/todos/:id', function (req, res) {
 	var todoId = parseInt(req.params.id, 10);
-	var matchedTodo = _.findWhere(todos, {id: todoId});
 
-    if (matchedTodo) {
-    	res.json(matchedTodo);
-    	return; 
-    } else {
-		// send a 404, since we didn't return. 
-		res.status(404).send("error:", "no todo found with that id"); 
-    }
+	 db.todo.findById(todoId).then(function (todo) {
+	 	 if (!!todo) {
+           res.json(todo.toJSON());
+         } else {
+         	res.status(404).send(); 
+         }
+       }, function (e) {
+         res.status(500).json(e).send();
+         console.log(e); 
+     });
+
 });
 
 // POST /todos
@@ -67,25 +70,14 @@ app.post('/todos', function(req, res) {
               res.status(400).json(e);
               console.log(e); 
             });
-
-   
- //    // set body.description to the trimmed value. 
- //    body.description = body.description.trim(); 
-
-	// // add id field
-	// body.id = todoNextId++;
-
-	// console.log('got here');
-	// // push body to array
-	// todos.push(body);
-	// console.log(body.description); 
-	//res;
 });
 
 // DELETE /todos/:id
 app.delete('/todos/:id', function (req, res) {
 	var todoId = parseInt(req.params.id, 10);
-	var matchedTodo = _.findWhere(todos, {id: todoId});
+   
+
+    var matchedTodo = _.findWhere(todos, {id: todoId});
 
     console.log('in delete'); 
     if (matchedTodo) {
