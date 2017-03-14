@@ -128,6 +128,21 @@ app.put('/todos/:id', function(req, res) {
     });
 });
 
+// POST /todos
+app.post('/users', function(req, res) {
+	console.log('post users');
+	// use _.pick to only pick description and completed. 
+	var body = _.pick(req.body, 'email', 'password');
+	console.log(body); 	
+
+    db.user.create(body).then(function (user) {
+               res.json(user.toJSON());
+            }, function (e) {
+              res.status(400).json(e);
+              console.log(e); 
+            });
+});
+
 db.sequelize.sync().then(function() {
 	app.listen(PORT, function(){
 		console.log('Express listening on port ' + PORT + '!');
