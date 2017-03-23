@@ -151,15 +151,17 @@ app.post('/users/login', function(req, res) {
 	// use _.pick to only pick description and completed. 
 	var body = _.pick(req.body, 'email', 'password');
 	  db.user.authenticate(body).then(function (user) {
-	  res.json(user.toPublicJSON());
+	  console.log(user.toPublicJSON());
+	  var token = user.generateToken('authentication');
+	  console.log("token:");
+	  console.log(token);
+	  res.header('Auth', token).json(user.toPublicJSON());
 	}, function() {
       res.status(401).send(); 
 	});
-	
-
 });
 
-db.sequelize.sync({force:true}).then(function() {
+db.sequelize.sync().then(function() {
 	app.listen(PORT, function(){
 		console.log('Express listening on port ' + PORT + '!');
 	});
