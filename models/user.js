@@ -63,7 +63,7 @@ module.exports = function (sequelize, DataTypes) {
 						console.log("resolve user");
 						resolve(user);
 					}, function(e) {
-						console.log(e);
+						console.error(e);
 						reject();
 					});
 		  		});
