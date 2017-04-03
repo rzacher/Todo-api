@@ -167,17 +167,21 @@ app.post('/users/login', function(req, res) {
 	console.log('post /users/login');
 	// use _.pick to only pick description and completed. 
 	var body = _.pick(req.body, 'email', 'password');
+    var userInstance; 
+
 	  db.user.authenticate(body).then(function (user) {
 	  console.log(user.toPublicJSON());
 	  var token = user.generateToken('authentication');
-	  console.log("token:");
-	  console.log(token);
-	  if (token) {
-	    res.header('Auth', token).json(user.toPublicJSON());
-	  } else {
-	  	res.status(401).send();
-	  }
-	}, function() {
+	  userInstance = user; 
+
+	  return db.token.create({
+	  	  token: token
+	  });
+	}).then(function(tokenInstance) {
+	   console.log("token:");
+	   console.log(tokenInstance.get('token'));
+       res.header('Auth', tokenInstance.get('token')).json(userInstance.toPublicJSON());
+	}).catch(function() {
       res.status(401).send(); 
 	});
 });
