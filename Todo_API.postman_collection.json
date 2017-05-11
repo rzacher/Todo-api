@@ -1,0 +1,160 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Todo API",
+		"_postman_id": "ec3fa373-c468-2a8f-f582-563578feb61f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /todos",
+			"request": {
+				"url": "{{apiUrl}}/todos",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "{{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /todos",
+			"request": {
+				"url": "{{apiUrl}}/todos",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Auth",
+						"value": "{{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"go skiing\",\n  \"completed\": false\n}"
+				},
+				"description": "POST /todos"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /todo/id ",
+			"request": {
+				"url": "{{apiUrl}}/todos/1",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Auth",
+						"value": "{{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /todos/6",
+			"request": {
+				"url": "{{apiUrl}}/todos/4",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Auth",
+						"value": "{{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"FBWF\",\n  \"completed\": false\n}"
+				},
+				"description": "PUT /todos"
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users",
+			"request": {
+				"url": "{{apiUrl}}/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"bzacher1@gmail.com\",\n\t\"password\": \"abcdefgh\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "POST /users/login",
+			"request": {
+				"url": "{{apiUrl}}/users/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"bzacher1@gmail.com\",\n\t\"password\": \"abcdefgh\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE /users/login",
+			"request": {
+				"url": "{{apiUrl}}/users/login?Auth={{authToken}}",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Auth",
+						"value": "{{authToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"bzacher1@gmail.com\",\n\t\"password\": \"abcdefgh\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
